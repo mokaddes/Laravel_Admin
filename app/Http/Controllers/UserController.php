@@ -92,9 +92,8 @@ class UserController extends Controller
         // }else{
         //     $input = Arr::except($input,array('password'));
         // }
-        $image = $request->file('image');
-        $filename = date('YmdHis'). '.' . $image->getClientOriginalExtension();
-        $image->move('images/', $filename);
+
+
 
         $user = User::find($id);
         $user->name = $request->name;
@@ -103,6 +102,9 @@ class UserController extends Controller
             $user->password = Hash::make($request->password);
         }
         if(!empty($request->file('image'))){
+            $image = $request->file('image');
+            $filename = date('YmdHis'). '.' . $image->getClientOriginalExtension();
+            $image->move('images/', $filename);
             $user->image = $filename;
         }
         $user->is_admin = $request->is_admin;

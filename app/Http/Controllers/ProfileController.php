@@ -72,9 +72,7 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $image = $request->file('image');
-        $filename = date('YmdHis') . '.' . $image->getClientOriginalExtension();
-        $image->move('images/', $filename);
+
 
         $user = User::find($id);
         $user->name = $request->name;
@@ -83,6 +81,9 @@ class ProfileController extends Controller
             $user->password = Hash::make($request->password);
         }
         if(!empty($request->file('image'))){
+            $image = $request->file('image');
+            $filename = date('YmdHis') . '.' . $image->getClientOriginalExtension();
+            $image->move('images/', $filename);
             $user->image = $filename;
         }
         $user->update();

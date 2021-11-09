@@ -8,7 +8,7 @@
         <div class="row">
                 <div class="col-lg-12 margin-tb">
                     <div class="pull-left btn btn-info">
-                        <h2>User List</h2>
+                        User List
                     </div>
                     <div class="pull-right">
                         @if(Auth::user()->is_admin == 1)

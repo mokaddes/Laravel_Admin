@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="pull-left btn btn-info">
-                <h2 > Show User</h2>
+                Show User
             </div>
             <div class="pull-right ">
                 <a class="btn btn-primary" href="{{ route('users.index') }}"> Back</a>
