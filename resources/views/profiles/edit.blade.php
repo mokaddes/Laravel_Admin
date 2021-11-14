@@ -5,7 +5,7 @@
 @section('content')
 <div class="container" style="padding-top:50px">
   <div class="row">
-    <div class="col-lg-12">
+    <div class="col-md-10 col-md-offset-1">
         <div class="pull-left btn btn-info">
           Update Profile
         </div>

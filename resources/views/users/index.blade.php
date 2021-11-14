@@ -3,10 +3,10 @@
     Users
 @endsection
 @section('content')
-<section class="content" style="padding-top:50px">
+<section class="content" style="padding-top:30px">
     <div class="container">
         <div class="row">
-                <div class="col-lg-12 margin-tb">
+                <div class="col-md-10 col-md-offset-1 margin-tb">
                     <div class="pull-left btn btn-info">
                         User List
                     </div>
@@ -26,6 +26,11 @@
             <div class="alert alert-danger" style="margin-top:20px">
                 <p>{{ $message }}</p>
             </div>
+        @endif
+        @if (request('search'))
+        <div class="alert alert-primary" style="margin-top:20px">
+            <p>Search Result: {{$users->count()}}</p>
+        </div>
         @endif
 
         <table class="table table-bordered text-center" style="margin-top: 20px;">

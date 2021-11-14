@@ -16,7 +16,14 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
+        // dd($request->search);
         $users = User::orderBy('id','DESC')->paginate(5);
+        if(request('search')){
+            $users = User::where('name', 'like', '%' . request('search') . '%')
+            ->orWhere('email', 'like', '%'. request('search') . '%')
+            ->paginate(5);
+        }
+
         return view('users.index',compact('users'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
@@ -112,9 +119,10 @@ class UserController extends Controller
         return redirect()->route('users.index')->with('success', 'Successfully Updated');
     }
 
-    public function profile($id)
+    public function photos()
     {
-
+        $photos = User::all();
+        return view('users.images', compact('photos'));
     }
 
     public function updateProfile(Request $request, $id)
@@ -134,6 +142,17 @@ class UserController extends Controller
         $users->delete();
 
         return redirect()->route('users.index')->with('delete', 'Successfully Deleted');
+    }
+
+    public function search(Request $request)
+    {
+        $key = trim($request->get('search'));
+        $users = User::query()
+            ->where('name', 'like', "%{$key}%")
+            ->orWhere('email', 'like', "%{$key}%")
+            ->orderBy('created_at', 'desc')
+            ->get();
+            return view('users.search');
     }
 
 

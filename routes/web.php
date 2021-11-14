@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PostController;
+use App\Models\Post;
+use App\Http\Controllers\EventController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,21 +24,29 @@ use App\Http\Controllers\ProfileController;
 
 
 Route::get('/', function () {
-    return view('dashboard');
+    $posts = Post::all();
+    return view('dashboard', compact('posts'));
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
 
-Route::get('/home', function () {
-    return view('home');
-})->middleware(['admin'])->name('home');
+
 
 Route::group(['middleware' => ['auth', 'admin']], function() {
     Route::resource('users', UserController::class);
+    Route::get('gallery', [UserController::class, 'photos'])->name('photos');
     Route::resource('profiles', ProfileController::class);
+    Route::resource('posts', PostController::class);
+    Route::get('fullcalendar', [EventController::class, 'index'])->name('fullcalendar');
+    Route::post('fullcalenderAjax', [EventController::class, 'ajax']);
 });
 Route::group(['middleware' => ['auth']], function() {
     Route::resource('users', UserController::class)->except(['create', 'update', 'edit', 'destroy']);
+    Route::resource('posts', PostController::class)->except(['create', 'update', 'edit', 'destroy']);
     Route::resource('profiles', ProfileController::class);
+    Route::get('gallery', [UserController::class, 'photos'])->name('photos');
+    Route::get('fullcalendar', [EventController::class, 'index'])->name('fullcalendar');
+    Route::post('fullcalenderAjax', [EventController::class, 'ajax']);
 });
+
 

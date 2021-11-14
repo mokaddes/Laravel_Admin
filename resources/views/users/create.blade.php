@@ -6,7 +6,7 @@
 
 <div class="container" style="padding-top:50px">
   <div class="row">
-    <div class="col-lg-12">
+    <div class="col-md-10 col-md-offset-1">
         <div class="pull-left btn btn-info">
             Create User
         </div>
@@ -54,7 +54,7 @@
                                     <label class="control-label">Profile Image</label>
                                     <input type="file" placeholder="image" name="image" class="form-control" onchange="previewFile" required>
                                     <img id="previewImg" style="width:100px;margin-top:20px">
-                                </div>
+                            </div>
                               <div class="form-group">
                                   <label class="control-label">Status</label>
                                   <select name="is_admin" id="" class="form-control">
